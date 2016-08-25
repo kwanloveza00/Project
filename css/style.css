@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'proxima_novalight';
+    src: url('proximanova-light-webfont.woff2') format('woff2'),
+         url('proximanova-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+#logo {
+	margin-top: 38px;
+	text-align: center;
+	margin-bottom: 24px;
+}
+body {
+	background-color: #298EEA;
+	font-family: proxima_novalight;
+}
+#addcustom{
+background-color: #FFFFFF;
+	width: 1000px;
+	margin: 0 auto;
+	border-top-left-radius: 3px;
+}
+#content {
+	background-color: #E9E9E9;
+	width: 400px;
+	margin: 0 auto;
+	border-top-left-radius: 3px;
+}
+#title {
+	font-size: 35px;
+	text-align: center;
+	padding-top: 39px;
+	color: #565656;
+	padding-bottom: 53px;
+}
+#email {
+	text-align: center;
+}
+#password {
+	text-align: center;
+}
+#button {
+	text-align: center;
+
+}
+.input {
+	width: 295px;
+	font-family: proxima_novalight;
+	font-size: 17px;
+	padding-top: 11px;
+	padding-right: 11px;
+	padding-bottom: 11px;
+	padding-left: 11px;
+	border-color: #E7E7E7;
+	border-style: solid;
+	border-radius: 3px;
+	font-weight: bold;
+	margin-top: 0px;
+	margin-bottom: 22px;
+}
+.button {
+	width: 295px;
+	font-family: proxima_novalight;
+	font-size: 22px;
+	font-weight: bold;
+	background-color: #15cd72;
+	color: #FFFFFF;
+	padding-top: 11px;
+	padding-right: 11px;
+	padding-bottom: 11px;
+	padding-left: 11px;
+	border-style: none;
+	border-radius: 3px;
+}
+.forgot {
+	color: #A599A5;
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: underline;
+}
+#footer {
+	text-align: center;
+	color: #FFFFFF;
+}
+#footer a {
+	color: #FFFFFF;
+}
