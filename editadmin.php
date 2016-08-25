@@ -25,7 +25,7 @@ list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday, $sex, $address, 
 
 <div class="container">
 	<div class="row">
-	<form class="form-horizontal" action="page4.php" method="post">
+	<form class="form-horizontal" action="adminpage1.php" method="post">
 
 	<div class="form-group">
 		<div class="col-sm-6"></div>
