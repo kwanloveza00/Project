@@ -1,5 +1,5 @@
 <?php
-echo $_GET['customerId'];
+echo $_GET['adminId'];
 
 
 ?>
@@ -8,7 +8,7 @@ echo $_GET['customerId'];
 include 'config.php';
 connect_db();
 
-	$query = db()->query('SELECT adminId, name, lastName, phone, empoyeeId, birthday, sex, address, classId, createdBy FROM customers WHERE adminId = "'.$_GET['adminId'].'"');
+	$query = db()->query('SELECT adminId, name, lastName, phone, empoyeeId, birthday, sex, address, classId, createdBy FROM admin WHERE adminId = "'.$_GET['adminId'].'"');
 
 list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday, $sex, $address, $classId, $createdBy  ) = $query->fetch_row();
 
@@ -75,31 +75,7 @@ list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday, $sex, $address, 
 	 </div>
 	 </div>
 
-	 <div class="form-group">
-		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>วันที่ขาย:</FONT></label>
-			<div class="col-sm-8">
-		<input value="<?php echo $seleDate; ?>" type="text" name="seleDate" class="form-control" placeholder="seleDate">
-		<div class="col-sm-2"></div>
-	 </div>
-	 </div>
-
-	 <div class="form-group">
-		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>ราคา:</FONT></label>
-			<div class="col-sm-8">
-		<input value="<?php echo $price; ?>" type="text" name="price" class="form-control" placeholder="price">
-		<div class="col-sm-2"></div>
-	 </div>
-	 </div>
-
-<div class="form-group">
-		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>ชื่อพนักงาน:</FONT></label>
-			<div class="col-sm-8">
-		<input value="<?php echo $adminId; ?>" type="text" name="adminId" class="form-control" placeholder="createdBy">
-		<div class="col-sm-2"></div>
-	 </div>
-	 </div>
-
-
+	
 <div class="form-group">
 	<div class="col-sm-2"></div>
 	<div class="col-sm-10">
@@ -111,7 +87,7 @@ list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday, $sex, $address, 
 	<div class="form-group">
 	<div class="col-sm-2"></div>
 	<div class="col-sm-10">
-		<input type="hidden" name="customerId" value="<?php echo $_GET['customerId'];?>">
+		<input type="hidden" name="adminId" value="<?php echo $_GET['adminId'];?>">
 		<input a class="btn btn-primary" type="submit" value="แก้ไข"></a></div>
 	 </div>
 
