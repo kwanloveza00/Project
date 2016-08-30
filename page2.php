@@ -13,10 +13,18 @@ $last = db()->real_escape_string($_POST['lastName']);
 $phone = db()->real_escape_string($_POST['phone']);
 $address = db()->real_escape_string($_POST['address']);
 $sex = db()->real_escape_string($_POST['sex']);
+$seleDate = db()->real_escape_string($_POST['seleDate']);
+$price = db()->real_escape_string($_POST['price']);
+
+
+print_r($_POST);
+die();
 
 ?>
 <?php
 $query = db()->query('SELECT customerId FROM customers WHERE name = "'. $cardId .'" LIMIT 1');
+$query = db()->query('SELECT productId FROM product WHERE name = "'. $price .'" LIMIT 1');
+$query = db()->query('SELECT dealingId FROM dealing WHERE name = "'. $seleDate .'" LIMIT 1');
 if($query->num_rows > 0)
 
 {
@@ -34,7 +42,9 @@ name,
 lastName,
 phone,
 address,
-sex
+sex,
+seleDate,
+price
 )
 VALUES 
 (
@@ -45,7 +55,34 @@ VALUES
 "'.$lastName.'",
 "'.$phone.'",
 "'.$address.'",
-"'.$sex.'"
+"'.$sex.'",
+"'.$seleDate.'",
+"'.$price.'"
+
+)');
+
+db()->query('INSERT INTO product
+(
+productId,
+price
+)
+VALUES 
+(
+"'.$productId.'",
+"'.$price.'"
+
+)');
+db()->query('INSERT INTO dealing
+(
+dealingId,
+seleDate
+
+)
+VALUES 
+(
+"'.$dealingId.'",
+"'.$seleDate.'"
+
 )');
 header('Location: index.php');
 echo db()->error;

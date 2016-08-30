@@ -1,27 +1,23 @@
 <?php
 echo $_GET['customerId'];
-
-
 ?>
 
 <?php
 include 'config.php';
 connect_db();
 
-	$query = db()->query('SELECT customerId, adminId, cardId, name, lastName, phone, address, sex FROM customers WHERE customerId = "'.$_GET['customerId'].'"');
+	$query = db()->query('SELECT customerId, cardId, name, lastName, phone, address, sex FROM customers WHERE customerId = "'.$_GET['customerId'].'"');
 
-list($customerId, $adminId, $cardId, $name, $lastName, $phone, $address, $sex ) = $query->fetch_row();
+list($customerId, $cardId, $name, $lastName, $phone, $address, $sex ) = $query->fetch_row();
 
-	$query = db()->query('SELECT productId, adminId, productName,price FROM product WHERE productId = "'.$_GET['productId'].'"');
+	$query = db()->query('SELECT productId, productName,price FROM product WHERE productId = "'.$_GET['productId'].'"');
 
-list($productId, $adminId, $productName, $price) = $query->fetch_row();
+list($productId, $productName, $price) = $query->fetch_row();
 
 
-	$query = db()->query('SELECT dealingId, adminId, customerId, productId, balances, paymenet, paymenetDate, seleDate FROM dealing WHERE dealingId = "'.$_GET['dealingId'].'"');
+	$query = db()->query('SELECT dealingId, balances, paymenet, paymenetDate, seleDate FROM dealing WHERE dealingId = "'.$_GET['dealingId'].'"');
 
-list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $paymenetDate, $seleDate) = $query->fetch_row();
-
-	
+list($dealingId, $balances, $paymenet, $paymenetDate, $seleDate) = $query->fetch_row();
 
 ?>
 <!doctype html>
@@ -35,7 +31,7 @@ list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $payme
 
 <div class="container">
 	<div class="row">
-	<form class="form-horizontal" action="page4.php" method="post">
+	<form class="form-horizontal" action="customerpage1.php" method="post">
 
 	<div class="form-group">
 		<div class="col-sm-6"></div>
@@ -46,16 +42,14 @@ list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $payme
    
 	<div class="form-group">
 		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>ชื่อ:</FONT></label>
-		
 		<div class="col-sm-8">
-		
-			<input value="<?php echo $name; ?>"type="text" name="name" class="form-control" placeholder="name">
+		<input value="<?php echo $name; ?>"type="text" name="name" class="form-control" placeholder="name">
 		</div>
 	</div>
 	  
 	<div class="form-group">
 		<label class="col-sm-2 control-label" ><FONT COLOR='#ff3333'>นามสกุล:</FONT></label>
-			<div class="col-sm-8">
+		<div class="col-sm-8">
 		<input value="<?php echo $lastName; ?>" type="text" name="lastName" class="form-control" placeholder="lastName">
 		<div class="col-sm-2"></div>
 		</div>
@@ -63,7 +57,7 @@ list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $payme
 	
 	<div class="form-group">
 		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>เบอร์ :</FONT></label>
-			<div class="col-sm-8">
+		<div class="col-sm-8">
 		<input value="<?php echo $phone; ?>" type="text" name="phone" class="form-control" placeholder="phone">
 		<div class="col-sm-2"></div>
 	 </div>
@@ -71,7 +65,7 @@ list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $payme
 	
 	<div class="form-group">
 		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>ที่อยู่:</FONT></label>
-			<div class="col-sm-8">
+		<div class="col-sm-8">
 		<input value="<?php echo $address; ?>" type="text" name="address" class="form-control" placeholder="address">
 		<div class="col-sm-2"></div>
 	 </div>
@@ -79,7 +73,7 @@ list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $payme
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>เพศ:</FONT></label>
-			<div class="col-sm-8">
+		<div class="col-sm-8">
 		<input value="<?php echo $sex; ?>" type="text" name="sex" class="form-control" placeholder="sex">
 		<div class="col-sm-2"></div>
 	 </div>
@@ -87,7 +81,7 @@ list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $payme
 
 	 <div class="form-group">
 		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>วันที่ขาย:</FONT></label>
-			<div class="col-sm-8">
+		<div class="col-sm-8">
 		<input value="<?php echo $seleDate; ?>" type="text" name="seleDate" class="form-control" placeholder="seleDate">
 		<div class="col-sm-2"></div>
 	 </div>
@@ -95,7 +89,7 @@ list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $payme
 
 	 <div class="form-group">
 		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>ราคา:</FONT></label>
-			<div class="col-sm-8">
+		<div class="col-sm-8">
 		<input value="<?php echo $price; ?>" type="text" name="price" class="form-control" placeholder="price">
 		<div class="col-sm-2"></div>
 	 </div>
@@ -103,20 +97,11 @@ list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $payme
 
 <div class="form-group">
 		<label class="col-sm-2 control-label"><FONT COLOR='#ff3333'>ชื่อพนักงาน:</FONT></label>
-			<div class="col-sm-8">
+		<div class="col-sm-8">
 		<input value="<?php echo $adminId; ?>" type="text" name="adminId" class="form-control" placeholder="createdBy">
 		<div class="col-sm-2"></div>
 	 </div>
 	 </div>
-
-
-<div class="form-group">
-	<div class="col-sm-2"></div>
-	<div class="col-sm-10">
-	<input type="checkbox">&nbsp;ยอมรับเงื่อนไขการใช้บริการ</div>
-</div>
-
-
 
 	<div class="form-group">
 	<div class="col-sm-2"></div>
@@ -128,8 +113,7 @@ list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $payme
   </form>
   </div>
 </div>
-  
-  
+
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
  </body>

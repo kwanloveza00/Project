@@ -75,20 +75,11 @@ list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday, $sex, $address, 
 	 </div>
 	 </div>
 
-	
-<div class="form-group">
-	<div class="col-sm-2"></div>
-	<div class="col-sm-10">
-	<input type="checkbox">&nbsp;ยอมรับเงื่อนไขการใช้บริการ</div>
-</div>
-
-
-
 	<div class="form-group">
 	<div class="col-sm-2"></div>
 	<div class="col-sm-10">
-		<input type="hidden" name="adminId" value="<?php echo $_GET['adminId'];?>">
-		<input a class="btn btn-primary" type="submit" value="แก้ไข"></a></div>
+	<input type="hidden" name="adminId" value="<?php echo $_GET['adminId'];?>">
+	<input a class="btn btn-primary" type="submit" value="แก้ไข"></a></div>
 	 </div>
 
   </form>
