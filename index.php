@@ -103,22 +103,19 @@ connect_db();
 	</tr>
 	<!--  -->
 <?php
-$query = db()->query('SELECT customerId, adminId, cardId, name, lastName, phone, address, sex FROM customers ORDER BY customerId ASC');
-
+	$query = db()->query('SELECT customerId, adminId, cardId, name, lastName, phone, address, sex FROM customers ORDER BY customerId ASC');
 echo db()->error;
 while(list($customerId, $cardId, $adminId, $name, $lastName, $phone, $address, $sex) = $query->fetch_row())
 {
 
-$query = db()->query('SELECT productId, adminId, productName,price FROM product ORDER BY productId ASC');
-
+	$query = db()->query('SELECT productId, price FROM product ORDER BY productId ASC');
 echo db()->error;
-while(list($productId, $adminId, $productName, $price) = $query->fetch_row())
+while(list($productId,$price) = $query->fetch_row())
 {
 
-	$query = db()->query('SELECT dealingId, adminId, customerId, productId, balances, paymenet, paymenetDate, seleDate FROM dealing ORDER BY dealingId ASC');
-
+	$query = db()->query('SELECT dealingId, balances, paymenet, seleDate FROM dealing ORDER BY dealingId ASC');
 echo db()->error;
-while(list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $paymenetDate, $seleDate) = $query->fetch_row())
+while(list($dealingId, $balances, $paymenet, $seleDate) = $query->fetch_row())
 {
 ?>
 
@@ -130,7 +127,7 @@ while(list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, 
 		<td><center><?php echo $price;?></td>
 		<td><center><?php echo $balances;?></td>
 		<td><center><?php echo $paymenet;?></td>
-		<td><center><a href="product.php">เช็ค</a></center></td>
+		<td><center><a href="chekcustomer.php?customerId=<?php echo $customerId; ?>">เช็ค</a></center></td>
 		<td><center><a href="#addcustom2">เพิ่ม</a></center></td>
 		
 		</tr>
@@ -148,7 +145,7 @@ while(list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, 
 			</div><!-- /footer -->
 		</div>
 
-	<!-----------------เช็คข้อมูลพนักงาน----------------------------------------- -->
+<!-----------------เช็คข้อมูลพนักงาน----------------------------------------- -->
 
 		<div data-role="page" id="page3">			
 			<div data-role="panel" id="defaultpanel" data-display="overlay">				
@@ -182,6 +179,7 @@ while(list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, 
 		<td><center><FONT COLOR='FF3300'><strong>เพศ</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ข้อมมูลเพิ่มเติม</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>เพิ่มข้อมูล</strong></FONT></center></td>
+		<td><center><FONT COLOR='FF3300'><strong>แก้ไข</strong></FONT></center></td>
 	</tr>
 	<!--  -->
 <?php
@@ -200,8 +198,9 @@ while(list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday , $sex, $ad
 		<td><center><?php echo $phone;?></td>
 		<td><center><?php echo $birthday;?></td>
 		<td><center><?php echo $sex;?></td>
-		<td><center><a href="product.php">เช็ค</a></center></td>
+		<td><center><a href="chekcustomer.php">เช็ค</a></center></td>
 		<td><center><a href="#addcustom2">เพิ่ม</a></center></td>
+		<td><center><a href="editadmin.php">แก้ไข</a></center></td>
 		
 		</tr>
 <?php
@@ -243,7 +242,7 @@ while(list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday , $sex, $ad
 
 			<div id="">
  <div class="row">
-   <form class="form-horizontal"action="page3.php" method="post">
+   <form class="form-horizontal"action="page2.php" method="post" data-ajax="false">
    
 	
 	<div class="form-group">
@@ -285,10 +284,10 @@ while(list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday , $sex, $ad
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label" >เพศ:</label>
-		<div class="col-sm-8" name="sex"placeholder="เพศ">
-	<select class="form-control">
-  <option>ชาย</option>
-  <option>หญิง</option>
+		<div class="col-sm-8" placeholder="เพศ">
+	<select class="form-control" name="sex" placeholder="เพศ">
+  <option value="ชาย">ชาย</option>
+  <option value="หญิง">หญิง</option>
 </select>
 		<div class="col-sm-2"></div>
 		</div>
@@ -297,7 +296,7 @@ while(list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday , $sex, $ad
 	<div class="form-group">
 		<label class="col-sm-2 control-label" >วันที่ขาย:</label>
 		<div class="col-sm-8">
-		<input type="text" name="seleDate"class="form-control"placeholder="วันที่ขาย">
+		<input type="date" name="seleDate"class="form-control"placeholder="วันที่ขาย">
 		<div class="col-sm-2"></div>
 		</div>
 	</div>
@@ -313,7 +312,7 @@ while(list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday , $sex, $ad
             <div class="form-group">
                 <div class="col-md-4"></div>
 				<div class="col-md-4">
-				<input  a class="btn btn-warning" type="submit" value="เพิ่ม"></a></div>
+				<input class="btn btn-warning" type="submit" value="เพิ่ม"></div>
                 <div class="col-md-4">
 				</div>
 				</div>
@@ -325,13 +324,23 @@ while(list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday , $sex, $ad
  
   
 <?php
-$query = db()->query('SELECT customerId, adminId, cardId, name, lastName, phone, address, sex FROM customers ORDER BY customerId ASC');
+	$query = db()->query('SELECT customerId, adminId, cardId, name, lastName, phone, address, sex FROM customers ORDER BY customerId ASC');
 while(list($customerId, $cardId, $name, $last, $phone, $address, $sex) = $query->fetch_row())
+{
+	$query = db()->query('SELECT dealingId, seleDate FROM dealing ORDER BY dealingId ASC');
+while(list($dealingId, $seleDate) = $query->fetch_row())
+	
+{
+	$query = db()->query('SELECT productId, price sex FROM product ORDER BY productId ASC');
+while(list($productId, $price) = $query->fetch_row())
+
 {
 ?>
 
 
 <?php
+}
+}
 }
 ?>
  </form>
@@ -486,7 +495,7 @@ while(list($adminId, $empoyeeId, $name, $lastName, $phone, $birthday, $address, 
 		<td><center><FONT COLOR='FF3300'><strong>ลำดับ</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>รหัสการ์ด</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ชื่อ นามสกุล</strong></FONT></center></td>
-		<td><center><FONT COLOR='FF3300'><strong>รายการสินค้า</strong></FONT></center></td>
+		<td><center><FONT COLOR='FF3300'><strong>วันที่ขาย</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ราคา</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ชำระแล้ว</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ยอดคงเหลือ</strong></FONT></center></td>
@@ -494,22 +503,19 @@ while(list($adminId, $empoyeeId, $name, $lastName, $phone, $birthday, $address, 
 		<td><center><FONT COLOR='FF3300'><strong>แก้ไข</strong></FONT></center></td>
 	</tr>
 <?php
-$query = db()->query('SELECT customerId, adminId, cardId, name, lastName, phone, address, sex FROM customers ORDER BY customerId ASC');
-
+	$query = db()->query('SELECT customerId, adminId, cardId, name, lastName, phone, address, sex FROM customers ORDER BY customerId ASC');
 echo db()->error;
 while(list($customerId, $cardId, $adminId, $name, $lastName, $phone, $address, $sex) = $query->fetch_row())
 {
 
-$query = db()->query('SELECT productId, adminId, productName,price FROM product ORDER BY productId ASC');
-
+	$query = db()->query('SELECT productId, price FROM product ORDER BY productId ASC');
 echo db()->error;
-while(list($productId, $adminId, $productName, $price) = $query->fetch_row())
+while(list($productId,$price) = $query->fetch_row())
 {
 
-	$query = db()->query('SELECT dealingId, adminId, customerId, productId, balances, paymenet, paymenetDate, seleDate FROM dealing ORDER BY dealingId ASC');
-
+	$query = db()->query('SELECT dealingId, balances, paymenet, seleDate FROM dealing ORDER BY dealingId ASC');
 echo db()->error;
-while(list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, $paymenetDate, $seleDate) = $query->fetch_row())
+while(list($dealingId, $balances, $paymenet, $seleDate) = $query->fetch_row())
 {
 ?>
 <tr >
@@ -521,7 +527,7 @@ while(list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, 
 		<td><center><?php echo $balances;?></td>
 		<td><center><?php echo $paymenet;?></td>
 		<td><center><a href="product.php">ลบ</a></center></td>
-		<td><center><a href="editcustomer.php ?customerId=<?php echo $customerId;?>">แก้ไข</a></center></td>
+		<td><center><a href="editcustomer.php?customerId=<?php echo $customerId;?>">แก้ไข</a></center></td>
 		
 		</tr>
 <?php
@@ -580,23 +586,7 @@ while(list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, 
 		<div class="form-group">
 		<label class="col-sm-2 control-label" >ชื่อสินค้า:</label>
 		<div class="col-sm-8">
-		<input type="text" name="product"class="form-control"placeholder="ชื่อสินค้า">
-		<div class="col-sm-2"></div>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label" >วันที่ขาย:</label>
-		<div class="col-sm-8">
-		<input type="text" name="saletime"class="form-control"placeholder="วันที่ขาย">
-		<div class="col-sm-2"></div>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label" >ราคา:</label>
-		<div class="col-sm-8">
-		<input type="text" name="price"class="form-control"placeholder="ราคา">
+		<input type="text" name="productName"class="form-control"placeholder="ชื่อสินค้า">
 		<div class="col-sm-2"></div>
 		</div>
 	</div>
@@ -605,7 +595,7 @@ while(list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, 
 	<div class="form-group">
 		<label class="col-sm-2 control-label">ชำระเงิน: </label>
 			<div class="col-sm-8">
-		<input type="text" name="payment"class="form-control"placeholder="ชำระเงิน">
+		<input type="text" name="paymenet"class="form-control"placeholder="ชำระเงิน">
 		<div class="col-sm-2">
 	 </div>
 	</div>
@@ -615,21 +605,14 @@ while(list($dealingId, $adminId, $customerId, $productId, $balances, $paymenet, 
 <div class="form-group">
 		<label class="col-sm-2 control-label" >วันที่ชำระ :</label>
 			<div class="col-sm-8">
-		<input type="text" name="paymentdeat"class="form-control"placeholder="วันที่ชำระ">
+		<input type="text" name="paymenetDate"class="form-control"placeholder="วันที่ชำระ">
 	 </div>
 	 </div>
-
-	<div class="form-group">
-		<label class="col-sm-2 control-label" >คงเหลือ:</label>
-			<div class="col-sm-8">
-		<input type="text" name="balances"class="form-control"placeholder="ยอดคงเหลือ">
-	 </div>
-		 </div>
 
 		 <div class="form-group">
 		<label class="col-sm-2 control-label" >ชื่อพนักงาน:</label>
 			<div class="col-sm-8">
-		<input type="text" name="staffname"class="form-control"placeholder="ชื่อพนักงานขาย">
+		<input type="text" name="createdBy"class="form-control"placeholder="ชื่อพนักงานขาย">
 	 </div>
 		 </div>
 	      
