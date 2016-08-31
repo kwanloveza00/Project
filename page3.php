@@ -53,7 +53,7 @@ VALUES
 "'.$classId.'",
 "'.$createdBy.'"
 )');
-header('Location: index.php#page3');
+header('Location: text.php#page3');
 echo db()->error;
 echo $mysqli->error;
 ?>

@@ -84,7 +84,7 @@ VALUES
 "'.$seleDate.'"
 
 )');
-header('Location: index.php');
+header('Location: text.php');
 echo db()->error;
 echo $mysqli->error;
 

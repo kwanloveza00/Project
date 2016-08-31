@@ -9,14 +9,16 @@
   <body>
    <section class="login">
 	<div class="titulo"> ล็อกอิน </div>
-	<form action="#" method="post" enctype="application/x-www-form-urlencoded">
-    	<input type="text" required title="Username required" placeholder="Username" data-icon="U">
-        <input type="password" required title="Password required" placeholder="Password" data-icon="x">
+	<form enctype="application/x-www-form-urlencoded" class="form" action="login.php" method="post">
+    	
+		<input type="text" name="empoyeeId" required title="Username required" placeholder="empoyeeId" data-icon="U">
+        <input type="password" name="birthday" required title="Password required" placeholder="birthday" data-icon="x">
         <div class="olvido">
-        	<div class="col"><a href="#" title="Ver Carásteres">Register</a></div>
+         <div class="col"><a href="#" title="Ver Carásteres">Register</a></div>
             <div class="col"><a href="#" title="Recuperar Password">Fotgot Password?</a></div>
-        </div>
-        <a href="#" class="enviar">ล็อกอิน</a>
+        </div>   
+		<button class="enviar" type="submit" id="login-button">Login</button>
+       <!-- <a href="#" class="enviar">ล็อกอิน</a> -->
     </form>
 </section>
 
