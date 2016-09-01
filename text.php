@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 session_start();
 if(!isset($_SESSION['Admin']))
 {
@@ -9,6 +10,11 @@ include 'config.php';
 connect_db();
 ?>
 
+=======
+include 'config.php';
+connect_db();
+?>
+>>>>>>> 75f08442a8c19931760714f55bc8f81016d6fce8
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" >
 <head>
@@ -63,6 +69,19 @@ connect_db();
 			<div role="main" class="ui-content"><center>
 				<img src="img/ALOHA.png" width="25%"></center>
 			</div><!-- /content -->
+<<<<<<< HEAD
+=======
+			
+<?php
+if(!isset($_COOKIE [$empoyeeId])) {
+    echo "empoyee '" . $empoyeeId . "' is not set!";
+} else 
+	{
+    echo "Cookie empoyeeId '" . $empoyeeId . "' is set!<br>";
+    echo "Value is empoyeeId: " . $_COOKIE[$empoyeeId];
+}
+?>
+>>>>>>> 75f08442a8c19931760714f55bc8f81016d6fce8
 
 <div id="content">
 			<div id="email">
