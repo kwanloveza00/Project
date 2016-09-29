@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 session_start(); 
 include 'config.php';
 connect_db();
@@ -23,12 +22,18 @@ $_SESSION['empoyeeId']=$data['adminId'];
 if ($data['classId'] == 1){
 	/*$_SESSION['status'] = "Admin";*/
 	$_SESSION['Admin'] = "Admin";
-	echo "<meta http-equiv='refresh' content='1;URL=text.php'>";
+	echo "<meta http-equiv='refresh' content='1;URL=page1.php'>";
 
 }elseif ($data['classId'] == 2){
 	/*$_SESSION['status'] = "User";*/
 	$_SESSION['User'] = "User";
 	echo "<meta http-equiv='refresh' content='1;URL=menuUser.php'>";
+}else
+	{
+//����ҹ
+header('Location:index.html');
+die();
+
 }
 /*$num = $query->num_rows;
 if($num <= 0){
@@ -86,33 +91,3 @@ echo "<meta http-equiv='refresh' content='1;URL=menuUser2.php'>";
 		}*/
 	}
 ?>
-=======
-session_start();
-include 'config.php';
-connect_db();
-
-$empoyeeId= $_POST['empoyeeId'];
-$birthday= $_POST['birthday'];
-
-$query =db()->query('SELECT adminId FROM admin WHERE empoyeeId="'. $empoyeeId .'" AND birthday = "'. $birthday .'" LIMIT 1');
-
-//echo db()->error;
-
-$num = $query->num_rows;
-
-if($num > 0)
-{
-//ผ่าน
-$_SESSION['login'] = true;
-setcookie('empoyeeId', $empoyeeId,time()+3600*24*356);
-header('location:text.php');
-die();
-}
-else
-{
-//ไม่ผ่าน
-setcookie('empoyeeId', $empoyeeId);
-header('location:index.html');
-die();
-}
->>>>>>> 75f08442a8c19931760714f55bc8f81016d6fce8

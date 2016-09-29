@@ -26,7 +26,7 @@ connect_db();
 </head>
 <body>
 
-<div data-role="page" id="page2">			
+		<div data-role="page" id="page6">			
 			<div data-role="panel" id="defaultpanel" data-display="overlay">				
 				<ul data-role="listview">
 					<li data-icon="info" data-theme="b"><a href="#" data-rel="close">ปิดเมนู</a></li>
@@ -36,28 +36,28 @@ connect_db();
 					<li><a href="page4.php">เพิ่มข้อมูลลูกค้า</a></li>
 					<li><a href="page5.php">เพิ่มข้อมูลพนักงาน</a></li>
 					<li><a href="page6.php">ลบ/แก้ไข ข้อมูลลูกค้า</a></li>
+				</ul>
 			</div><!-- /panel -->
 			
 			<div data-role="header">
 				<a href="#defaultpanel" data-icon="bars" data-iconpos="notext">Menu</a>
 				<h1>เช็คข้อมูลลูกค้า</h1>
-					<a href="logout.php" class="ui-btn ui-shadow" >ออกจากระบบ</a>
+					<a href="login.php?q=logout" class="ui-btn ui-shadow">ออกจากระบบ</a>
 			</div><!-- /header --><br>
 
 			
- <table class="table table-hover">
+ <table class="table table-condensed">
 	<tr class="success">
 		<td><center><FONT COLOR='FF3300'><strong>ลำดับ</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>รหัสการ์ด</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ชื่อ นามสกุล</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>วันที่ขาย</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ราคา</strong></FONT></center></td>
-		<td><center><FONT COLOR='FF3300'><strong>คงเหลือ</strong></FONT></center></td>
-		<td><center><FONT COLOR='FF3300'><strong>พนักงานขาย</strong></FONT></center></td>
-		<td><center><FONT COLOR='FF3300'><strong>ข้อมมูลเพิ่มเติม</strong></FONT></center></td>
-		<td><center><FONT COLOR='FF3300'><strong>เพิ่มข้อมูล</strong></FONT></center></td>
+		<td><center><FONT COLOR='FF3300'><strong>ชำระแล้ว</strong></FONT></center></td>
+		<td><center><FONT COLOR='FF3300'><strong>ยอดคงเหลือ</strong></FONT></center></td>
+		<td><center><FONT COLOR='FF3300'><strong>ลบ</strong></FONT></center></td>
+		<td><center><FONT COLOR='FF3300'><strong>แก้ไข</strong></FONT></center></td>
 	</tr>
-	<!--  -->
 <?php
 	$deal_query = db()->query('SELECT dealingId, customerId, productId, balances, paymenet, seleDate FROM dealing ORDER BY dealingId ASC');
 echo db()->error;
@@ -68,31 +68,28 @@ while(list($dealingId, $customerId, $productId, $balances, $paymenet, $seleDate)
 	echo db()->error;
 	list($productId,$price) = $product_query->fetch_row();
 
-	$admin_query = db()->query('SELECT adminId,name,lastName,phone,empoyeeId,password,birthday,sex,address,classId,createdBy FROM admin WHERE adminId = "'. $productId .'" LIMIT 1');
-	echo db()->error;
-	list($adminId,$name,$lastName,$phone,$empoyeeId,$password,$birthday,$sex,$address,$classId,$createdBy) = $admin_query->fetch_row();
 
-
-	$customer_query = db()->query('SELECT customerId, adminId, cardId, nameCustomer, lastName, phone, address, sex FROM customers WHERE customerId = "'. $customerId .'" LIMIT 1');
+	$customer_query = db()->query('SELECT customerId, adminId, cardId, name, lastName, phone, address, sex FROM customers WHERE customerId = "'. $customerId .'" LIMIT 1');
 echo db()->error;
-	list($customerId, $adminId, $cardId, $nameCustomer, $lastName, $phone, $address, $sex) = $customer_query->fetch_row();
+	list($customerId, $adminId, $cardId, $name, $lastName, $phone, $address, $sex) = $customer_query->fetch_row();
 ?>
-
 <tr >
 		<td><center><?php echo $dealingId;?></td>
 		<td><center><?php echo $cardId;?></td>
-		<td><center><?php echo $nameCustomer;?>  <?php echo $lastName ;?></td>
+		<td><center><?php echo $name;?>  <?php echo $lastName ;?></td>
 		<td><center><?php echo $seleDate;?></td>
-		<td><center><?php echo $price;?></td> 
+		<td><center><?php echo $price;?></td>
+		<td><center><?php echo $balances;?></td>
 		<td><center><?php echo $paymenet;?></td>
-		<td><center><?php echo $name;?></td>
-		<td><center><a href="chekcustomer.php?customerId=<?php echo $customerId; ?>">เช็ค</a></center></td>
-		<td><center><a href="#addcustom2?customerId=<?php echo $customerId; ?>">เพิ่ม</a></center></td>
+		<td><center><a href="product.php">ลบ</a></center></td>
+		<td><center><a href="editcustomer.php?customerId=<?php echo $customerId;?>">แก้ไข</a></center></td>
 		
 		</tr>
 <?php
 }
 ?>
+
+
 </table>
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -102,9 +99,6 @@ echo db()->error;
 			</div><!-- /footer -->
 		</div>
  
-
-
-
 
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
