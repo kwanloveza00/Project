@@ -120,13 +120,6 @@ connect_db();
 		</div>
 	</div>
 
-	<div class="form-group">
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4">
-		<input type="checkbox" name="classId"class="form-control"value="1">ยืนยันการเพิ่มพนักงาน
-		<div class="col-sm-1"></div>
-		</div>
-	</div>
 
                  
             <div class="form-group">
@@ -143,6 +136,17 @@ connect_db();
 		</ul>
   </form>
  
+<?php
+
+$query = db()->query('SELECT adminId, empoyeeId, name, lastName, birthday, phone, address, sex, classId, createdBy FROM admin ORDER BY adminId ASC');
+while(list($adminId, $empoyeeId, $name, $lastName,$birthday,  $phone, $address, $sex, $classId, $createdBy) = $query->fetch_row())
+{
+?>
+
+
+<?php
+}
+?>
 			</div><!-- /content -->
 
 			<div data-role="footer">
@@ -154,6 +158,6 @@ connect_db();
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 </div>
-
+	
 	</body>
 </html>
