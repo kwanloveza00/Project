@@ -53,8 +53,8 @@ connect_db();
 		<td><center><FONT COLOR='FF3300'><strong>ชื่อ นามสกุล</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>วันที่ขาย</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ราคา</strong></FONT></center></td>
-		<td><center><FONT COLOR='FF3300'><strong>ชำระแล้ว</strong></FONT></center></td>
-		<td><center><FONT COLOR='FF3300'><strong>ยอดคงเหลือ</strong></FONT></center></td>
+		<td><center><FONT COLOR='FF3300'><strong>คงเหลือ</strong></FONT></center></td>
+		<td><center><FONT COLOR='FF3300'><strong>พนักงานขาย</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ลบ</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>แก้ไข</strong></FONT></center></td>
 	</tr>
@@ -63,25 +63,28 @@ connect_db();
 echo db()->error;
 while(list($dealingId, $customerId, $productId, $balances, $paymenet, $seleDate) = $deal_query->fetch_row())
 {
+	$admin_query = db()->query('SELECT adminId,name,lastName,phone,empoyeeId,password,birthday,sex,address,classId,createdBy FROM admin WHERE adminId = "'. $productId .'" LIMIT 1');
+	echo db()->error;
+	list($adminId,$name,$lastName,$phone,$empoyeeId,$password,$birthday,$sex,$address,$classId,$createdBy) = $admin_query->fetch_row();
 
 	$product_query = db()->query('SELECT productId, price FROM product WHERE productId = "'. $productId .'" LIMIT 1');
 	echo db()->error;
 	list($productId,$price) = $product_query->fetch_row();
 
 
-	$customer_query = db()->query('SELECT customerId, adminId, cardId, name, lastName, phone, address, sex FROM customers WHERE customerId = "'. $customerId .'" LIMIT 1');
+	$customer_query = db()->query('SELECT customerId, adminId, cardId, nameCustomer, lastName, phone, address, sex FROM customers WHERE customerId = "'. $customerId .'" LIMIT 1');
 echo db()->error;
-	list($customerId, $adminId, $cardId, $name, $lastName, $phone, $address, $sex) = $customer_query->fetch_row();
+	list($customerId, $adminId, $cardId, $nameCustomer, $lastName, $phone, $address, $sex) = $customer_query->fetch_row();
 ?>
 <tr >
 		<td><center><?php echo $dealingId;?></td>
 		<td><center><?php echo $cardId;?></td>
-		<td><center><?php echo $name;?>  <?php echo $lastName ;?></td>
+		<td><center><?php echo $nameCustomer;?>  <?php echo $lastName ;?></td>
 		<td><center><?php echo $seleDate;?></td>
-		<td><center><?php echo $price;?></td>
-		<td><center><?php echo $balances;?></td>
+		<td><center><?php echo $price;?></td> 
 		<td><center><?php echo $paymenet;?></td>
-		<td><center><a href="product.php">ลบ</a></center></td>
+		<td><center><?php echo $name;?></td>
+		<td><center><a href="delete.php?dealingId=<?php echo $dealingId;?>,?customerId="<?php echo $customerId;?>>ลบ</a></td>
 		<td><center><a href="editcustomer.php?customerId=<?php echo $customerId;?>">แก้ไข</a></center></td>
 		
 		</tr>

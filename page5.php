@@ -50,9 +50,8 @@ connect_db();
 			</div><!-- /header -->
 			<div id="">
  <div class="row">
-   <form class="form-horizontal"action="page3.php" method="post">
+   <form class="form-horizontal"action="addstaff.php" method="post">
 
-			
 		<div class="form-group">
 		<label class="col-sm-2 control-label">ไอดีพนักงาน</label>
 		<div class="col-sm-8">
@@ -120,6 +119,15 @@ connect_db();
 		<div class="col-sm-2"></div>
 		</div>
 	</div>
+
+	<div class="form-group">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+		<input type="checkbox" name="classId"class="form-control"value="1">ยืนยันการเพิ่มพนักงาน
+		<div class="col-sm-1"></div>
+		</div>
+	</div>
+
                  
             <div class="form-group">
                 <div class="col-md-4"></div>
@@ -134,17 +142,7 @@ connect_db();
 			<ul class="nav navbar-nav navbar-left">
 		</ul>
   </form>
-  
-<?php
-$query = db()->query('SELECT adminId, empoyeeId, name, lastName, phone, birthday, address, sex, classId, createdBy FROM admin ORDER BY adminId ASC');
-while(list($adminId, $empoyeeId, $name, $lastName, $phone, $birthday, $address, $sex, $classId, $createdBy) = $query->fetch_row())
-{
-?>
-
-
-<?php
-}
-?>
+ 
 			</div><!-- /content -->
 
 			<div data-role="footer">

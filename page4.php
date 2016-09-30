@@ -122,7 +122,7 @@ connect_db();
 		</div>
 	</div>
 
-	<div class="form-group">
+	<!--<div class="form-group">
 		<label class="col-sm-2 control-label" >ราคาสินค้า</label>
 		<div class="col-sm-8" placeholder="ราคาสินค้า">
 	<select class="form-control" name="productId" placeholder="ราคาสินค้า">
@@ -131,7 +131,7 @@ connect_db();
 </select>
 		<div class="col-sm-2"></div>
 		</div>
-	</div>
+	</div>-->
                  
             <div class="form-group">
                 <div class="col-md-4"></div>

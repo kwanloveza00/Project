@@ -75,11 +75,15 @@ VALUES (
 $dealing_query = db()->query('SELECT dealingId FROM dealing WHERE productId = "'. $seleDate .'" LIMIT 1');
 
 db()->query('INSERT INTO dealing (
+productId,
 seleDate
 )
 VALUES (
+"'.$productId.'",
 "'.$seleDate.'"
 )');
+
+<a href="data.php?<?=$db['id'];?>">
 
 
 
