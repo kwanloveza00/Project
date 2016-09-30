@@ -56,8 +56,8 @@ VALUES
 "'.$birthday.'",
 "'.$sex.'",
 "'.$address.'",
-"'.$classId.'",
-"'.$createdBy.'"
+2,
+1
 )');
 //header('Location:text.php');
 echo db()->error;
