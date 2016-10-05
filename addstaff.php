@@ -18,11 +18,11 @@ $address = $_POST['address'];
 $classId = $_POST['classId'];
 $createdBy = $_POST['createdBy'];
 
-/*if($password == $cpassword )
+if($password != $cpassword )
 
 {
 	die('not password.');
-}*/
+}
 
 $query = db()->query('SELECT adminId FROM admin WHERE empoyeeId = "'. $empoyeeId .'" LIMIT 1');
 if($query->num_rows > 0)

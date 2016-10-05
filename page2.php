@@ -85,9 +85,9 @@ echo db()->error;
 		<td><center><?php echo $seleDate;?></td>
 		<td><center><?php echo $price;?></td> 
 		<td><center><?php echo $paymenet;?></td>
-		<td><center><?php echo $name;?></td>
+		<td><center><?php echo $name;?> <?php echo $lastName ;?></td>
 		<td><center><a href="chekcustomer.php?customerId=<?php echo $customerId; ?>">เช็ค</a></center></td>
-		<td><center><a href="#addcustom2?customerId=<?php echo $customerId; ?>">เพิ่ม</a></center></td>
+		<td><center><a href="addcustom2?customerId=<?php echo $customerId; ?>">เพิ่ม</a></center></td>
 		
 		</tr>
 <?php

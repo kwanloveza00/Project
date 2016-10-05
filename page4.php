@@ -56,11 +56,7 @@ connect_db();
 	
 	<div class="form-group">
 
-		<label class="col-sm-2 control-label">รหัส Card:</label>
-		<div class="col-sm-8">
-			<input type="text" name="cardId"class="form-control"placeholder="รหัส">
-		</div>
-		</div>
+		
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label">ชื่อ:</label>
@@ -103,35 +99,28 @@ connect_db();
 		</div>
 	</div>
 
-	<div class="form-group">
-		<label class="col-sm-2 control-label" >วันที่ขาย:</label>
-		<div class="col-sm-8">
-		<input type="date" name="seleDate"class="form-control"placeholder="วันที่ขาย">
-		<div class="col-sm-2"></div>
-		</div>
-	</div>
+	<?php
+$admin_query = db()->query('SELECT adminId, name,lastName,phone,empoyeeId,password,birthday,sex,address,classId,createdBy FROM admin ORDER BY adminId ASC');
+echo db()->error;
+	?>
 
 	<div class="form-group">
-		<label class="col-sm-2 control-label" >ราคาสินค้า</label>
-		<div class="col-sm-8" placeholder="ราคาสินค้า">
-	<select class="form-control" name="productId" placeholder="ราคาสินค้า">
-  <option value="1">เครื่องปั่น  2800</option>
-  <option value="2">เครื่องปั่น  2500</option>
+		<label class="col-sm-2 control-label" >ชื่อพนักงาน</label>
+		<div class="col-sm-8" placeholder="ชื่อพนักงาน">
+	<select class="form-control" name="adminId" placeholder="ชื่อพนักงาน">
+	<?php
+	while(list($adminId, $name,$lastName,$phone,$empoyeeId,$password,$birthday,$sex,$address,$classId,$createdBy) = $admin_query->fetch_row())
+	{	?>
+		
+  <option value="<?php echo $adminId; ?>"><?php echo $name.' '.$lastName; ?></option>
+  <?php
+}	
+?>
 </select>
 		<div class="col-sm-2"></div>
 		</div>
 	</div>
 
-	<!--<div class="form-group">
-		<label class="col-sm-2 control-label" >ราคาสินค้า</label>
-		<div class="col-sm-8" placeholder="ราคาสินค้า">
-	<select class="form-control" name="productId" placeholder="ราคาสินค้า">
-  <option value="1">เครื่องปั่น  2800</option>
-  <option value="2">เครื่องปั่น  2500</option>
-</select>
-		<div class="col-sm-2"></div>
-		</div>
-	</div>-->
                  
             <div class="form-group">
                 <div class="col-md-4"></div>
