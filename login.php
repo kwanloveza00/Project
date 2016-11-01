@@ -91,3 +91,48 @@ echo "<meta http-equiv='refresh' content='1;URL=menuUser2.php'>";
 		}*/
 	}
 ?>
+
+
+<!--<?php
+session_start(); 
+include 'config.php';
+connect_db();
+$empoyeeId = $_POST['empoyeeId'];
+$password = $_POST['password'];
+	mysql_connect('localhost','root','','project');
+	mysql_select_db('project');
+	$str_SQL = ('SELECT * FROM admin WHERE empoyeeId = "'.trim($_POST['empoyeeId']).'" 
+	and password = "'.trim($_POST['password']).'"');
+	echo db()->error;
+	
+	$obj_Query = mysql_query($str_SQL);
+	$obj_Result = mysql_fetch_array($obj_Query);
+	if(!$obj_Result)
+	{
+			echo "<script>alert('Username and Password Incorrect!');</script>";
+			exit();
+	}
+	else
+	{
+			$_SESSION["adminId"] = $objResult["adminId"];
+			$_SESSION["classId"] = $objResult["classId"];
+
+			session_write_close();
+			
+			if($objResult["classId"] == "1")
+			{
+				header("location:admin_page.php");
+			}
+			else
+			{
+				header("location:user_page.php");
+			}
+	}
+	mysql_close();
+?>-->
+
+
+
+
+<!-------------------------------------------------------------------------->
+

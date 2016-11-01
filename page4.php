@@ -1,4 +1,4 @@
-<?php
+	<?php
 session_start();
 if(!isset($_SESSION['Admin']))
 {
@@ -53,10 +53,13 @@ connect_db();
  <div class="row">
    <form class="form-horizontal"action="addcus.php" method="post" data-ajax="false">
    
-	
-	<div class="form-group">
 
-		
+	<div class="form-group">
+		<label class="col-sm-2 control-label">รหัสการ์ด:</label>
+		<div class="col-sm-8">
+		<input type="text" name="cardId"class="form-control"placeholder="รหัสการ์ด">
+		</div>
+	</div>
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label">ชื่อ:</label>
@@ -98,7 +101,7 @@ connect_db();
 		<div class="col-sm-2"></div>
 		</div>
 	</div>
-
+<!--
 	<?php
 $admin_query = db()->query('SELECT adminId, name,lastName,phone,empoyeeId,password,birthday,sex,address,classId,createdBy FROM admin ORDER BY adminId ASC');
 echo db()->error;
@@ -119,7 +122,7 @@ echo db()->error;
 </select>
 		<div class="col-sm-2"></div>
 		</div>
-	</div>
+	</div>-->
 
                  
             <div class="form-group">

@@ -2,26 +2,23 @@
 include 'config.php';
 connect_db();
 //if(!isset($_POST['customerId']) &&(!isset($_POST['cardId']) && !isset($_POST['name']) && !isset($_POST['last']) && !isset($_POST['phone']) && !isset($_POST['address']) && !isset($_POST['sex']))
-{
+//{
 	//die('Hacker');
-}
+//}
 
-$cardId = $_POST['cardId'];
 $seleDate =$_POST['seleDate'];
 $productId = $_POST['productId'];
+$adminId = $_POST['adminId'];
+$customerId =$_POST['customerId'];
 
 
+/*if(mb_strlen($seleDate == 0000-00-00) )
 
-//print_r($_POST);
-//die();
- $sql = "INSERT INTO customers customerId values '$customerId' ";
-$id = mysql_insert_id();
-$sql = " INSERT INTO dealing customerId Values '$id' ";
-
-?>
-<?php
-$customer_query = db()->query('SELECT customerId FROM customers WHERE nameCustomer = "'. $cardId .'" LIMIT 1');
-
+{
+	echo "<script>alert('Please enter cardId 3-12 charactors.');</script>";
+	die('Please enter cardId 3-12 charactors.');
+}
+*/
 
 //{
 //	die('Username duplicate');
@@ -54,32 +51,28 @@ productId
 "'.$seleDate.'"
 )';*/
 
-echo db()->error;
-db()->query('INSERT INTO customers (
-cardId
-)
-VALUES (
-"'.$cardId.'"
-)');
+
 
 
 $dealing_query = db()->query('SELECT dealingId FROM dealing WHERE paymenet = "'. $seleDate .'" LIMIT 1');
 
 db()->query('INSERT INTO dealing (
+seleDate,
 productId,
 adminId,
+customerId
 
-seleDate
 )
 VALUES (
+"'.$seleDate.'",
 "'.$productId.'",
 "'.$adminId.'",
-"'.$seleDate.'"
+"'.$customerId.'"
 )');
 
 
 
-//header('Location: page2.php');
+header('Location: page2.php');
 echo db()->error;
 
 

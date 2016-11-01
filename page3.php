@@ -57,7 +57,7 @@ connect_db();
 		<td><center><FONT COLOR='FF3300'><strong>วันเกิด</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>เพศ</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ที่อยู่</strong></FONT></center></td>
-		<td><center><FONT COLOR='FF3300'><strong>เพิ่มข้อมูล</strong></FONT></center></td>
+		<td><center><FONT COLOR='FF3300'><strong>เช็คข้อมูล</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>แก้ไข</strong></FONT></center></td>
 	</tr>
 	<!--  -->
@@ -78,7 +78,7 @@ while(list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday , $sex, $ad
 		<td><center><?php echo $birthday;?></td>
 		<td><center><?php echo $sex;?></td>
 		<td><center><?php echo $address; ?></center></td>
-		<td><center><a href="#addcustom2">เพิ่ม</a></center></td>
+		<td><center><a href="chekstaff.php?adminId=<?php echo $adminId; ?>">เช็ค</a></center></td>
 		<td><center><a href="editadmin.php?adminId=<?php echo $adminId; ?>">แก้ไข</a></center></td>
 		
 		</tr>
@@ -91,10 +91,6 @@ while(list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday , $sex, $ad
 				<h4>จบหน้า</h4>
 			</div><!-- /footer -->
 		</div>
- 
-
-
-
 
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>

@@ -44,7 +44,8 @@ connect_db();
 					<a href="logout.php" class="ui-btn ui-shadow" >ออกจากระบบ</a>
 			</div><!-- /header --><br>
 
-			
+		
+
  <table class="table table-hover">
 	<tr class="success">
 		<td><center><FONT COLOR='FF3300'><strong>ลำดับ</strong></FONT></center></td>
@@ -55,13 +56,13 @@ connect_db();
 		<td><center><FONT COLOR='FF3300'><strong>คงเหลือ</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>พนักงานขาย</strong></FONT></center></td>
 		<td><center><FONT COLOR='FF3300'><strong>ข้อมมูลเพิ่มเติม</strong></FONT></center></td>
-		<td><center><FONT COLOR='FF3300'><strong>เพิ่มข้อมูล</strong></FONT></center></td>
 	</tr>
 	<!--  -->
 <?php
-	$deal_query = db()->query('SELECT dealingId, customerId, productId, balances, paymenet, seleDate FROM dealing ORDER BY dealingId ASC');
+
+	$deal_query = db()->query('SELECT dealingId, customerId, productId, seleDate FROM dealing ORDER BY dealingId ASC');
 echo db()->error;
-while(list($dealingId, $customerId, $productId, $balances, $paymenet, $seleDate) = $deal_query->fetch_row())
+while(list($dealingId, $customerId, $productId, $seleDate) = $deal_query->fetch_row())
 {
 
 	$product_query = db()->query('SELECT productId, price FROM product WHERE productId = "'. $productId .'" LIMIT 1');
@@ -73,25 +74,42 @@ while(list($dealingId, $customerId, $productId, $balances, $paymenet, $seleDate)
 	list($adminId,$name,$lastName,$phone,$empoyeeId,$password,$birthday,$sex,$address,$classId,$createdBy) = $admin_query->fetch_row();
 
 
-	$customer_query = db()->query('SELECT customerId, adminId, cardId, nameCustomer, lastName, phone, address, sex FROM customers WHERE customerId = "'. $customerId .'" LIMIT 1');
+	$customer_query = db()->query('SELECT customerId, cardId, nameCustomer, lastNameCus, phone, address, sex FROM customers WHERE customerId = "'. $customerId .'" LIMIT 1');
 echo db()->error;
-	list($customerId, $adminId, $cardId, $nameCustomer, $lastName, $phone, $address, $sex) = $customer_query->fetch_row();
+	list($customerId, $cardId, $nameCustomer, $lastNameCus, $phone, $address, $sex) = $customer_query->fetch_row();
 ?>
 
 <tr >
 		<td><center><?php echo $dealingId;?></td>
 		<td><center><?php echo $cardId;?></td>
-		<td><center><?php echo $nameCustomer;?>  <?php echo $lastName ;?></td>
+		<td><center><?php echo $nameCustomer;?>  <?php echo $lastNameCus ;?></td>
 		<td><center><?php echo $seleDate;?></td>
 		<td><center><?php echo $price;?></td> 
-		<td><center><?php echo $paymenet;?></td>
+		<td><center>
+	<?php 
+	$num=0;
+	?>
+<?php 
+$payment_SQL =db()->query('SELECT  payment FROM payments WHERE dealingId ="'.$dealingId.'"');
+while(list($payment)=$payment_SQL->fetch_row())
+	{
+$num+=$payment;
+//echo $payment;
+	}
+	//echo $num;
+
+ $dealing_SQL =db()->query('SELECT price FROM product WHERE productId ="'.$dealingId.'"');
+list($price)=$dealing_SQL->fetch_row();
+$num_left=$price-$num;
+?>
+		<?php echo $num_left;?></td>
 		<td><center><?php echo $name;?> <?php echo $lastName ;?></td>
-		<td><center><a href="chekcustomer.php?customerId=<?php echo $customerId; ?>">เช็ค</a></center></td>
-		<td><center><a href="addcustom2?customerId=<?php echo $customerId; ?>">เพิ่ม</a></center></td>
+		<td><center><a href="chekcustomer.php?dealingId=<?php echo $dealingId; ?>">เช็ค</a></center></td>
 		
 		</tr>
 <?php
 }
+
 ?>
 </table>
   <script src="js/jquery-1.11.3.min.js"></script>

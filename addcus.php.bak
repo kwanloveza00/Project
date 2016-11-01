@@ -12,49 +12,50 @@ $lastName = $_POST['lastName'];
 $phone = $_POST['phone'];
 $address = $_POST['address'];
 $sex = $_POST['sex'];
-$seleDate =$_POST['seleDate'];
+
+if(mb_strlen($cardId,'UTF-8') < 3 || mb_strlen($cardId,'UTF-8') > 12)
+
+{
+	echo "<script>alert('Please enter cardId 3-12 charactors.');</script>";
+	//die('Please enter cardId 3-12 charactors.');
+}
+
+if(mb_strlen($nameCustomer,'UTF-8') < 4 || mb_strlen($nameCustomer,'UTF-8') > 32)
+{
+	echo "<script>alert('Please enter nameCustomer 4-32 charactors.');</script>";
+	
+	//die('Please enter nameCustomer 4-32 charactors.');
+}
+
+if(mb_strlen($phone,'UTF-8') < 9 || mb_strlen($phone,'UTF-8') > 32)
+{
+	echo "<script>alert('Please enter phone 10-32 charactors.');</script>";
+	//die('Please enter phone 10-32 charactors.');
+}
+
+if(mb_strlen($address,'UTF-8') <= 4)
+{
+	echo "<script>alert('Please enter address 4-32 charactors.');</script>";
+	die();
+}
+
+
+//$seleDate =$_POST['seleDate'];
+//$productId = $_POST['productId'];
+
 
 
 //print_r($_POST);
 //die();
 
-?>
-<?php
-$customer_query = db()->query('SELECT customerId FROM customers WHERE nameCustomer = "'. $cardId .'" LIMIT 1');
 
-
+$customer_query = db()->query('SELECT customerId FROM customers WHERE nameCustomer = "'. $phone .'" LIMIT 1');
 //{
 //	die('Username duplicate');
 //}
 
 echo db()->error;
-/*echo 'INSERT INTO customers
-(
-customerId,
-adminId,
-cardId,
-name,
-lastName,
-phone,
-address,
-sex,
-seleDate,
-price
-)
-VALUES 
-(
-"'.$cardId.'",
-"'.$name.'",
-"'.$lastName.'",
-"'.$phone.'",
-"'.$address.'",
-"'.$sex.'",
-"'.$seleDate.'",
-"'.$price.'"
-
-)';*/
-echo db()->error;
-db()->query('INSERT INTO customers (
+/*echo 'INSERT INTO customers (
 cardId,
 nameCustomer,
 lastName,
@@ -69,23 +70,48 @@ VALUES (
 "'.$phone.'",
 "'.$address.'",
 "'.$sex.'"
-)');
-
-
-$dealing_query = db()->query('SELECT dealingId FROM dealing WHERE productId = "'. $seleDate .'" LIMIT 1');
-
-db()->query('INSERT INTO dealing (
+)';
+echo 'INSERT INTO dealing (
 productId,
 seleDate
 )
 VALUES (
+productId
 "'.$productId.'",
 "'.$seleDate.'"
+)';*/
+
+echo db()->error;
+db()->query('INSERT INTO customers (
+cardId,
+nameCustomer,
+lastNameCus,
+phone,
+address,
+sex
+)
+VALUES (
+"'.$cardId.'",
+"'.$nameCustomer.'",
+"'.$lastName.'",
+"'.$phone.'",
+"'.$address.'",
+"'.$sex.'"
 )');
 
 
+/*$dealing_query = db()->query('SELECT dealingId FROM dealing WHERE paymenet = "'. $adminId .'" LIMIT 1');
 
-//header('Location: page2.php');
+db()->query('INSERT INTO dealing (
+adminId
+)
+VALUES (
+"'.$adminId.'"
+)');
+*/
+
+
+header('Location: addproduct.php');
 echo db()->error;
 
 

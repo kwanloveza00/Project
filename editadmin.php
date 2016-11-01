@@ -1,7 +1,5 @@
 <?php
 echo $_GET['adminId'];
-
-
 ?>
 
 <?php
@@ -74,13 +72,14 @@ list($adminId, $name, $lastName, $phone, $empoyeeId, $birthday, $sex, $address, 
 		<div class="col-sm-2"></div>
 	 </div>
 	 </div>
-
+<center>
 	<div class="form-group">
 	<div class="col-sm-2"></div>
-	<div class="col-sm-10">
+	<div class="col-sm-8">
 	<input type="hidden" name="adminId" value="<?php echo $_GET['adminId'];?>">
 	<input a class="btn btn-primary" type="submit" value="แก้ไข"></a></div>
 	 </div>
+</center>
 
   </form>
   </div>

@@ -59,9 +59,9 @@ connect_db();
 		<td><center><FONT COLOR='FF3300'><strong>แก้ไข</strong></FONT></center></td>
 	</tr>
 <?php
-	$deal_query = db()->query('SELECT dealingId, customerId, productId, balances, paymenet, seleDate FROM dealing ORDER BY dealingId ASC');
+	$deal_query = db()->query('SELECT dealingId, customerId, productId, seleDate FROM dealing ORDER BY dealingId ASC');
 echo db()->error;
-while(list($dealingId, $customerId, $productId, $balances, $paymenet, $seleDate) = $deal_query->fetch_row())
+while(list($dealingId, $customerId, $productId, $seleDate) = $deal_query->fetch_row())
 {
 	$admin_query = db()->query('SELECT adminId,name,lastName,phone,empoyeeId,password,birthday,sex,address,classId,createdBy FROM admin WHERE adminId = "'. $productId .'" LIMIT 1');
 	echo db()->error;
@@ -72,17 +72,34 @@ while(list($dealingId, $customerId, $productId, $balances, $paymenet, $seleDate)
 	list($productId,$price) = $product_query->fetch_row();
 
 
-	$customer_query = db()->query('SELECT customerId, adminId, cardId, nameCustomer, lastName, phone, address, sex FROM customers WHERE customerId = "'. $customerId .'" LIMIT 1');
+	$customer_query = db()->query('SELECT customerId, cardId, nameCustomer, lastNameCus, phone, address, sex FROM customers WHERE customerId = "'. $customerId .'" LIMIT 1');
 echo db()->error;
-	list($customerId, $adminId, $cardId, $nameCustomer, $lastName, $phone, $address, $sex) = $customer_query->fetch_row();
+	list($customerId, $cardId, $nameCustomer, $lastNameCus, $phone, $address, $sex) = $customer_query->fetch_row();
 ?>
 <tr >
 		<td><center><?php echo $dealingId;?></td>
 		<td><center><?php echo $cardId;?></td>
-		<td><center><?php echo $nameCustomer;?>  <?php echo $lastName ;?></td>
+		<td><center><?php echo $nameCustomer;?>  <?php echo $lastNameCus ;?></td>
 		<td><center><?php echo $seleDate;?></td>
-		<td><center><?php echo $price;?></td> 
-		<td><center><?php echo $paymenet;?></td>
+		<td><center><?php echo $price;?></td>
+		<td><center>
+	<?php 
+	$num=0;
+	?>
+<?php 
+$payment_SQL =db()->query('SELECT  payment FROM payments WHERE dealingId ="'.$dealingId.'"');
+while(list($payment)=$payment_SQL->fetch_row())
+	{
+$num+=$payment;
+//echo $payment;
+	}
+	//echo $num;
+
+ $dealing_SQL =db()->query('SELECT price FROM product WHERE productId ="'.$dealingId.'"');
+list($price)=$dealing_SQL->fetch_row();
+$num_left=$price-$num;
+?>
+		<?php echo $num_left;?></td> 
 		<td><center><?php echo $name;?></td>
 		<td><center><a href="delete.php?dealingId=<?php echo $dealingId;?>,?customerId="<?php echo $customerId;?>>ลบ</a></td>
 		<td><center><a href="editcustomer.php?customerId=<?php echo $customerId;?>">แก้ไข</a></center></td>

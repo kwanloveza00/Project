@@ -18,11 +18,18 @@ $address = $_POST['address'];
 $classId = $_POST['classId'];
 $createdBy = $_POST['createdBy'];
 
-if($password != $cpassword )
+if(mb_strlen($password == "") && mb_strlen($cpassword == "") ) 
+{
+echo "";
+die("กรุณากรอกรหัสผ่านทั้ง 2 ช่อง");
+}
+
+
+/*if($password == $cpassword )
 
 {
 	die('not password.');
-}
+}*/
 
 $query = db()->query('SELECT adminId FROM admin WHERE empoyeeId = "'. $empoyeeId .'" LIMIT 1');
 if($query->num_rows > 0)

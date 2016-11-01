@@ -65,9 +65,12 @@ connect_db();
 
 <div id="content">
 			<div id="email">
-        <input name="form-email" type="text" class="input" id="form-email" placeholder="ค้นหาลูกค้า">
-		
+			<form class="form-horizontal"action="searching.php" method="GET">
+
+        <input name="Search" type="text" class="input" id="form-email" placeholder="ค้นหาลูกค้า">
+
 		<input name="submit" type="submit" class="button" id="submit" value="ค้นหา">
+		</form>
 <!--------------->
 
    </div>

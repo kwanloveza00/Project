@@ -66,12 +66,12 @@ connect_db();
 		</div>
 		</div>
 
-   <!-- <div class="form-group">
+    <div class="form-group">
 		<label class="col-sm-2 control-label">ยืนยันรหัสผ่าน</label>
 		<div class="col-sm-8">
 			<input type="password" name="cpassword"class="form-control"placeholder="ยืนยันรหัสผ่าน">
 		</div>
-		</div> -->
+		</div>
 
 	<div class="form-group">
 		<label class="col-sm-2 control-label">ชื่อ:</label>
